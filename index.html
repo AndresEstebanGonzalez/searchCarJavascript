@@ -9,35 +9,15 @@
   </head>
   <body>
     <div class="container">
+      <p class="head-text">CarBooking</p>
       <div class="input-info">
-        <input id="car-make" type="text" placeholder="Marca del auto" />
-        <input id="car-plate" type="text" placeholder="Patente del auto" />
-        <button class="search-btn" id="submit" onclick="search()">
-          Search
-        </button>
+        <input id="carLicInput" type="text" placeholder="Marca del auto" />
+        <button class="search-btn" id="search">Search</button>
       </div>
-      <div class="info">
-        <h6>
-          Marca:
-          <p id="carMakeDisplay"></p>
-        </h6>
-
-        <h6>
-          Patente:
-          <p id="carPlateDisplay"></p>
-        </h6>
-        <h6>
-          Modelo:
-          <p id="carModelDisplay"></p>
-        </h6>
-        <h6>
-          Año:
-          <p id="carYearDisplay"></p>
-        </h6>
-        <h6>
-          Poliza:
-          <p id="carPoliza"></p>
-        </h6>
+      <div class="background">
+        <div class="list-container">
+          <ul class="list-group" id="list"></ul>
+        </div>
       </div>
     </div>
     <script src="./script.js"></script>
