@@ -1,5 +1,6 @@
-let fordCars = [
+const cars = [
   {
+    brand: "Ford",
     plate: 27360,
     model: "Ka",
     year: 2012,
@@ -9,7 +10,8 @@ let fordCars = [
     },
   },
   {
-    plate: 27360,
+    brand: "Ford",
+    plate: 27363,
     model: "Ranger",
     year: 2017,
     poliza: {
@@ -17,10 +19,8 @@ let fordCars = [
       number: 19785633,
     },
   },
-];
-
-let audiCars = [
   {
+    brand: "Audi",
     plate: 27360,
     model: "AA",
     year: 2010,
@@ -30,6 +30,7 @@ let audiCars = [
     },
   },
   {
+    brand: "Audi",
     plate: 27361,
     model: "A7",
     year: 2021,
@@ -38,10 +39,8 @@ let audiCars = [
       number: 25267,
     },
   },
-];
-
-let hondaCars = [
   {
+    brand: "Honda",
     plate: 27360,
     model: "Civic",
     year: 2019,
@@ -52,33 +51,73 @@ let hondaCars = [
   },
 ];
 
-function search(make) {
-  let carMake = document.getElementById("car-make").value;
-  let carPlate = document.getElementById("car-plate").value;
+let list = document.getElementById("list");
 
-  if (carMake == "Ford" && carPlate == 27360) {
-    document.getElementById("carPlateDisplay").innerText = fordCars[0].plate;
-    document.getElementById("carModelDisplay").innerText = fordCars[0].model;
-    document.getElementById("carYearDisplay").innerText = fordCars[0].year;
-    document.getElementById("carYearDisplay").innerText = fordCars[0].year;
-    document.getElementById("carPoliza").innerText = fordCars[0].poliza.number;
+function setList(group) {
+  clearList();
+  for (const car of group) {
+    const item = document.createElement("li");
+    const text = document.createTextNode(
+      "Brand: " +
+        car.brand +
+        " - " +
+        " Plate: " +
+        car.plate +
+        " Model: " +
+        car.model
+    );
+    item.appendChild(text);
+    list.appendChild(item);
   }
-  if (carMake == "Audi" && carPlate == 27360) {
-    document.getElementById("carPlateDisplay").innerText = audiCars[0].plate;
-    document.getElementById("carModelDisplay").innerText = audiCars[0].model;
-    document.getElementById("carYearDisplay").innerText = audiCars[0].year;
-    document.getElementById("carYearDisplay").innerText = audiCars[0].year;
-    document.getElementById("carPoliza").innerText = audiCars[0].poliza.number;
+  if (group.length === 0) {
+    setNoResults();
   }
-  if (carMake == "Audi" && carPlate == 27361) {
-    document.getElementById("carPlateDisplay").innerText = audiCars[1].plate;
-    document.getElementById("carModelDisplay").innerText = audiCars[1].model;
-    document.getElementById("carYearDisplay").innerText = audiCars[1].year;
-    document.getElementById("carYearDisplay").innerText = audiCars[1].year;
-    document.getElementById("carPoliza").innerText = audiCars[1].poliza.number;
-  }
-
-  document.getElementById("carMakeDisplay").innerText = carMake;
-  //document.getElementById("carModelDisplay").innerText = carModel;
-  //;
 }
+
+function clearList() {
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  }
+}
+
+function setNoResults() {
+  const item = document.createElement("li");
+  const text = document.createTextNode("No results found");
+  item.appendChild(text);
+  list.appendChild(item);
+}
+
+function getRelevancy(value, searchTerm) {
+  if (value === searchTerm) {
+    return 2;
+  } else if (value.startsWith(searchTerm)) {
+    return 1;
+  } else if (value.includes(searchTerm)) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
+
+const carLicInput = document.getElementById("carLicInput");
+const searchBtn = document.getElementById("search");
+
+carLicInput.addEventListener("keyup", (event) => {
+  let value = event.target.value;
+  if (event.keyCode == 13 && value && value.trim().length > 0) {
+    value = value.trim().toLowerCase();
+    setList(
+      cars
+        .filter((car) => {
+          return car.brand.toLowerCase().includes(value);
+        })
+        .sort((carA, carB) => {
+          return (
+            getRelevancy(carB.brand, value) - getRelevancy(carA.brand, value)
+          );
+        })
+    );
+  } else {
+    clearList();
+  }
+});

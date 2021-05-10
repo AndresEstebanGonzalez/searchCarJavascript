@@ -19,12 +19,19 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #e6e6e6;
+  background: -webkit-gradient(linear, left top, right top, from(#7f7fd5), to(#86a8e7));
+  background: linear-gradient(to right, #7f7fd5, #86a8e7);
+}
+
+.container .head-text {
+  margin: 2% 0 0 15%;
+  padding: 0;
+  color: #fff;
 }
 
 .container .input-info {
   width: 100%;
-  margin: 5% 0;
+  margin: 2% 0 5% 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,8 +45,9 @@ body {
 }
 
 .container .input-info input {
-  margin-left: 1rem;
+  width: 50%;
   padding: 0.3rem 1rem;
+  background-color: #fff;
   border: 1px solid #808080;
   border-radius: 50px;
   outline: none;
@@ -49,20 +57,54 @@ body {
   margin-left: 1rem;
   padding: 0.3rem 1rem;
   color: #fff;
-  background-color: #5858ff;
+  background-color: #8566ff;
   border: none;
   border-radius: 50px;
   -webkit-transition: 1ms;
   transition: 1ms;
 }
 
-.container .info {
-  width: 100%;
-  margin-left: 35%;
+.container .background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  background-image: url(./assets/two-cars.jpg);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position-x: center;
+  background-position-y: bottom;
+  border-radius: 15px 15px 0 0;
 }
 
-.container .info p {
-  margin: 0.5rem 0;
-  display: inline-block;
+.container .background .list-container {
+  width: 100%;
+}
+
+.container .background .list-container .list-group {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .background .list-container .list-group li {
+  width: 50%;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  color: #383737;
+  background-color: #f5f4fc;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  list-style: none;
 }
 /*# sourceMappingURL=styles.css.map */
